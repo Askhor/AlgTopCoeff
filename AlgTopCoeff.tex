@@ -8,6 +8,7 @@
 \usepackage{microtype}
 \usepackage[english]{babel}
 \usepackage{amsthm}
+\usepackage{xfrac}
 \usepackage{mathtools}
 \usepackage{braket}
 \usepackage[pdftex]{hyperref}
@@ -26,12 +27,93 @@
 }
 \setlength{\parindent}{0pt}
 
+\DeclareMathOperator{\img}{img}
+
 \begin{document}
 	\maketitle
 
 	This paper will be an execise in Algebraic Topology by developing singular homology with arbitrary coefficients.
 
+	\medskip
+
+	For this paper let $\mathbf{R}$ be a commutative ring and $T$ as topological space.
+
 	\section{The homology of the point}
 
+	\subsection{An Introduction of Homology}
+
+	First let us define the $k$-Simplex:
+	\begin{equation}
+		Δ^k \coloneq \set{(t_i) ϵ ℝ^{k+1} : Σ_{i=1}^{k+1} t_i = 1 \text{ and } 0≤t_i≤1}
+	\end{equation}
+
+	Then we define $C_k(T)$ as the free module over $\mathbf{R}$ with basis:
+	\begin{equation}
+		\set{Δ^k → T}
+	\end{equation}
+
+	Now we define $d_k: C_k(T) → C_{k-1}(T)$ to make the $C_k{T}$ a chain complex, meaning that $d²=0$:
+	\begin{equation}
+		d_k(φ) = Σ_{i=0}^{k} (-1)^i d_k^i(φ)
+	\end{equation}
+
+	The $d_k^i$ is defined as follows:
+	\begin{equation}
+		d_k^i(φ)(t_j) = φ(t_1, t_2, \dots, t_{i-1}, 0, t_{i+1} , \dots, t_{k-2}, t_{k-1})	
+	\end{equation}
+
+	\medskip
+
+	Homology can now be defined as:
+	\begin{equation}
+		H_k(T) \coloneq \sfrac{\ker(d_k)}{\img(d_{k+1})}
+	\end{equation}
+
+	\subsection{The calculation}
+
+	To calculate $H_k(*)$, we will need to figure out when $d_k$ is the identity and when it is the zero-map. First it will be good to understand the underlying chaincomplex:
+	\begin{equation}
+		C_k(*) = \set{r · (Δ^k → * \text{ constant}) : rϵ\mathbf R}
+	\end{equation}
+	In other words $\dim(C_k(*)) = 1$.
+
+	\medskip
+
+	Now if $k$ is odd there is an even number of boundries and all the terms in the alternating sum of $d_k$ cancel each other out and $d_k = 0$.
+
+	\medskip
+
+	If—however—$k$ is even it is not the null-map and (as $\dim(C_k(*))=1$) $d_k$ is an isomorphism.
 	
+	\medskip
+
+	This can be used to compute the kernel and the image of $d_k$:
+	\begin{equation}
+		\ker(d_k) =
+		\begin{cases}
+			\mathbf{R} &	\text{if } k \text{ odd}\\
+			0 	   &	\text{if } k \text{ even}\\
+		\end{cases}
+	\end{equation}
+	\begin{equation}
+		\img(d_k) =
+		\begin{cases}
+			0		& \text{if } k \text{ odd}\\
+			\mathbf{R}	& \text{if } k \text{ even}\\
+		\end{cases}
+	\end{equation}
+	
+	\medskip
+
+	This yields for $k>0$:
+	\begin{equation}
+		H_k(*) = 0
+	\end{equation}
+
+	\medskip
+
+	For $k=0$:
+	\begin{equation}
+		H_0(*) = \sfrac{\mathbf{R}}{0} = \mathbf{R}
+	\end{equation}
 \end{document}
